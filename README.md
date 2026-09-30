@@ -19,7 +19,18 @@ apps/gimbal/     云台板任务编排                                          
 tools/matlab/    轮腿建模与 K(L0) 拟合                                                         [待建]
 tests/           主机单测（GoogleTest）
 cmake/           交叉编译工具链
+third_party/libxr  LibXR 核心（Apache-2.0，git submodule）
 ```
+
+## 获取代码
+
+```bash
+git clone --recurse-submodules https://github.com/34fdsf232sa/MC02-Infantry.git
+# 已经克隆过的：
+git submodule update --init
+```
+
+libxr 锁定在 `4e96701`（2026-09-14 master，CI 全绿，包含 FDCAN 双 RX FIFO 修复）。升级时单独提交，并在提交说明里写清楚上游改动。固件构建由 `bsp/mc02` 以 `LIBXR_SYSTEM=FreeRTOS`、`LIBXR_DRIVER=st` 引入，BSP 工程建好之前 libxr 不参与构建。
 
 ## 设计原则
 
