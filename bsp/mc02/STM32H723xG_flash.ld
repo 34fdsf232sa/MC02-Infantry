@@ -241,7 +241,24 @@ SECTIONS
     . = ALIGN(8);
   } >DTCMRAM
 
+  /* DMA 缓冲区：DMA1/DMA2 无法访问 DTCM，放到 AXI SRAM；SPI6 的 BDMA 只能访问 D3 SRAM。
+     按 32 字节（Cortex-M7 cache line）对齐，后续开 D-Cache 时缓冲区不会与其它数据共享 cache line。
+     LibXR 通过 libxr_config.yaml 的 dma_section 把缓冲区放进这两个段。 */
+  .axi_ram (NOLOAD) :
+  {
+    . = ALIGN(32);
+    *(.axi_ram)
+    *(.axi_ram*)
+    . = ALIGN(32);
+  } >RAM_D1
 
+  .ram_d3 (NOLOAD) :
+  {
+    . = ALIGN(32);
+    *(.ram_d3)
+    *(.ram_d3*)
+    . = ALIGN(32);
+  } >RAM_D3
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

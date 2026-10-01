@@ -20,13 +20,14 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "adc.h"
+#include "bdma.h"
 #include "dma.h"
 #include "fdcan.h"
 #include "octospi.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
-#include "usb_device.h"
+#include "usb_otg.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -96,6 +97,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
+  MX_BDMA_Init();
   MX_ADC1_Init();
   MX_TIM12_Init();
   MX_SPI1_Init();
@@ -111,8 +113,9 @@ int main(void)
   MX_FDCAN2_Init();
   MX_FDCAN3_Init();
   MX_TIM1_Init();
-  MX_TIM2_Init();
   MX_OCTOSPI2_Init();
+  MX_USB_OTG_HS_PCD_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
