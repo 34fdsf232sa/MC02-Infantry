@@ -1,0 +1,6 @@
+# Horco 无线 CMSIS-DAP 调试器（主机端，VID:PID ef1a:74e5）
+# 用 uaccess 把权限只授予当前登录用户，不开放给所有用户。
+# 文件名用 70- 开头，保证排在 73-seat-late.rules 之前，uaccess 才会生效。
+SUBSYSTEM=="usb",    ATTRS{idVendor}=="ef1a", ATTRS{idProduct}=="74e5", TAG+="uaccess"
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="ef1a", ATTRS{idProduct}=="74e5", TAG+="uaccess"
+SUBSYSTEM=="tty",    ATTRS{idVendor}=="ef1a", ATTRS{idProduct}=="74e5", TAG+="uaccess"
